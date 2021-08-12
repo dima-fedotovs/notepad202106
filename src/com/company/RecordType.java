@@ -24,6 +24,12 @@ public enum RecordType {
         public Record create() {
             return new RecurringAlarm();
         }
+    },
+    REMINDER {
+        @Override
+        public Record create() {
+            return new Reminder();
+        }
     };
 
     public abstract Record create();

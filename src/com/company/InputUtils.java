@@ -1,5 +1,6 @@
 package com.company;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
@@ -7,7 +8,9 @@ import java.util.Scanner;
 
 public class InputUtils {
     public static final String TIME_FORMAT = "HH:mm";
+    public static final String DATE_FORMAT = "dd.MM.yyyy";
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -38,5 +41,10 @@ public class InputUtils {
     public static LocalTime askTime(String message) {
         var strTime = askString(message + " (" + TIME_FORMAT + ")");
         return LocalTime.parse(strTime, TIME_FORMATTER);
+    }
+
+    public static LocalDate askDate(String message) {
+        var strDate = askString(message + " (" + DATE_FORMAT + ")");
+        return LocalDate.parse(strDate, DATE_FORMATTER);
     }
 }
