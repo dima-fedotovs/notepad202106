@@ -1,25 +1,31 @@
 package com.company;
 
-public class RecurringAlarm extends StickyNote {
-    private String time;
+import java.time.LocalTime;
 
-    public String getTime() {
+public class RecurringAlarm extends StickyNote {
+    private LocalTime time;
+
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalTime time) {
         this.time = time;
+    }
+
+    public String getStrTime() {
+        return time.format(InputUtils.TIME_FORMATTER);
     }
 
     @Override
     public String toString() {
         var tmp = super.toString();
-        return tmp + ", time='" + time + '\'';
+        return tmp + ", time='" + getStrTime() + '\'';
     }
 
     @Override
     public void askData() {
         super.askData();
-        time = InputUtils.askString("Time");
+        time = InputUtils.askTime("Time");
     }
 }

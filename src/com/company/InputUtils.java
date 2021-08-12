@@ -1,9 +1,14 @@
 package com.company;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputUtils {
+    public static final String TIME_FORMAT = "HH:mm";
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
+
     private static final Scanner scanner = new Scanner(System.in);
 
     public static int askNumber(String message, int min, int max) {
@@ -30,4 +35,8 @@ public class InputUtils {
         return scanner.next();
     }
 
+    public static LocalTime askTime(String message) {
+        var strTime = askString(message + " (" + TIME_FORMAT + ")");
+        return LocalTime.parse(strTime, TIME_FORMATTER);
+    }
 }
