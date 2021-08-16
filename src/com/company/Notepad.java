@@ -1,5 +1,6 @@
 package com.company;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -46,7 +47,32 @@ public class Notepad {
             }
         }
     }
+
+    public void listDueRecords(LocalDateTime now) {
+        for (var r : records) {
+            if (r instanceof Scheduled) {
+                var sche = (Scheduled) r;
+                if (sche.isDue(now)) {
+                    System.out.println(sche);
+                }
+            }
+        }
+    }
+
+    public void dismissScheduled(int id) {
+        for (var r : records) {
+            if (r instanceof Scheduled) {
+                var sche = (Scheduled) r;
+                if (r.getId() == id) {
+                    sche.dismiss();
+                    break;
+                }
+            }
+        }
+    }
 }
+
+
 /*
 create BOOK John Smith 123456
 create PERSON Mike Johnson mike@mike.com

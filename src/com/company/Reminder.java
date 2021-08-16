@@ -1,9 +1,11 @@
 package com.company;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public class Reminder extends RecurringAlarm {
+public class Reminder extends RecurringAlarm implements Scheduled {
     private LocalDate date;
+    private boolean active = true;
 
     public LocalDate getDate() {
         return date;
@@ -28,4 +30,20 @@ public class Reminder extends RecurringAlarm {
         super.askData();
         date = InputUtils.askDate("Date");
     }
+
+    @Override
+    public boolean isDue(LocalDateTime now) {
+        if (active) {
+            var myDT = date.atTime(getTime());
+            return now.isAfter(myDT);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void dismiss() {
+        active = false;
+    }
+
 }

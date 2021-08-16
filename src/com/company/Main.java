@@ -1,5 +1,7 @@
 package com.company;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,11 +38,27 @@ public class Main {
                 case "search":
                     findRecord();
                     break;
+                case "due":
+                    listDueRecords();
+                    break;
+                case "dismiss":
+                    dismissScheduled();
+                    break;
                 default:
                     System.out.println("Unknown command");
             }
         }
         System.out.println("Good bye");
+    }
+
+    private static void dismissScheduled() {
+        var id = InputUtils.askNumber("Enter record ID to dismiss", 1, Integer.MAX_VALUE);
+        notepad.dismissScheduled(id);
+    }
+
+    private static void listDueRecords() {
+        var now = LocalDateTime.now();
+        notepad.listDueRecords(now);
     }
 
     private static void findRecord() {
