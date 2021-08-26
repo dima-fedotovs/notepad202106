@@ -81,7 +81,7 @@ public class Main {
             System.out.println("   " + t);
         }
         var strType = InputUtils.askString("Enter record type");
-        var type = RecordType.valueOf(strType);
+        var type = RecordType.findByName(strType);
 
         notepad.createRecord(type);
 
